@@ -1,0 +1,14 @@
+<h1>Trusted Types Demo</h1>
+
+<label for="taData" class="label">The (malicious) data to render</label>
+<textarea id="taData" class="element" [(ngModel)]="value"></textarea>
+<button id="btnRender" class="element" (click)="renderData()">Render data</button>
+
+<label for="divRender1" class="label mt-4">The <code>div</code> with the data passed through the Angular sanitizer</label>
+<div id="divRender1" class="element divRender" [innerHTML]="renderedValue"></div>
+
+<label for="divRender2" class="label mt-4">The <code>div</code> with the data passed through <code>bypassSecurityTrustHtml()</code></label>
+<div id="divRender2" class="element divRender" [innerHTML]="unsafeRenderedValue"></div>
+
+<label for="divRender3" class="label mt-4">The <code>div</code> with the data passed assigned directly to the native <code>innerHTML</code> sink</label>
+<div #divRender3 id="divRender3" class="element divRender"></div>
