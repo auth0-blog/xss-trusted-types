@@ -1,0 +1,27 @@
+#root {
+  font-family: Roboto;
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  text-align: center;
+}
+
+.element {
+  margin: 10px;
+}
+
+.label {
+  margin-left: 10px;
+  font-size: small;
+}
+
+.divRender {
+  padding: 10px;
+  border: solid 1px lightgrey;
+}
+
+.mt-4 {
+  margin-top: 20px;
+}
