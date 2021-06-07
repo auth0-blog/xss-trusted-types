@@ -1,0 +1,49 @@
+<html>
+
+<head>
+  <!-- Enabling Trusted Types -->
+  <meta http-equiv="Content-Security-Policy" content="require-trusted-types-for 'script'">
+  <script>
+    if (window.trustedTypes && trustedTypes.createPolicy) { // Feature testing
+        trustedTypes.createPolicy('default', {
+          createHTML: string => DOMPurify.sanitize(string, {RETURN_TRUSTED_TYPE: true})
+        });
+      }
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.2.7/purify.min.js"
+    integrity="sha512-srKA/HGYuusMcB2uqsvHKmqqE39vHU74WIuPBaKS5+wtfI6NquGXQtby+eM7o139a7Gt3szcHS09wou8GK4IJQ=="
+    crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <h1>Trusted Types Demo</h1>
+
+  <label for="taData" class="label">The (malicious) data to render</label>
+  <textarea id="taData" class="element"></textarea>
+  <button id="btnRender" class="element">Render data</button>
+
+  <label for="divRender" class="label mt-4">The <code>div</code> with the rendered data</label>
+  <div id="divRender" class="element"></div>
+
+  <script>
+    const initialData = `Hello!<img src="none" onerror="alert('This data has become code!')">`;
+
+      document.addEventListener("DOMContentLoaded", () => {
+        document.getElementById("taData").value = initialData;
+        document.getElementById("btnRender").addEventListener("click", render);
+      });
+
+      function render() {
+        let data = document.getElementById("taData").value;
+        let div = document.getElementById("divRender");
+
+        console.log(`Rendering data in the div: ${data}`);
+
+        div.innerHTML = data;
+      }
+  </script>
+</body>
+
+</html>
